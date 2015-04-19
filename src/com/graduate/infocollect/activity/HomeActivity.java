@@ -1,4 +1,6 @@
-package com.graduate.cancerinfocollect;
+package com.graduate.infocollect.activity;
+
+import com.graduate.cancerinfocollect.R;
 
 import android.app.Activity;
 import android.os.Bundle;
