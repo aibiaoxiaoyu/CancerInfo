@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <color name="transparent">#00000000</color>
+    <color name="transparent0.5">#80000000</color>
+
+    <!-- characters color -->
+    <color name="cor1">#ffffff</color>
+    <color name="cor2">#909090</color>
+    <color name="cor3">#333333</color>
+    <color name="cor4">#f2f2f2</color>
+
+</resources>
