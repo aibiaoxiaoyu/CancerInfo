@@ -496,6 +496,7 @@ containing a value of this type.
         public static final int cor2=0x7f040003;
         public static final int cor3=0x7f040004;
         public static final int cor4=0x7f040005;
+        public static final int cor5=0x7f040006;
         public static final int transparent=0x7f040000;
         public static final int transparent0_5=0x7f040001;
     }
@@ -508,57 +509,85 @@ containing a value of this type.
     
          */
         public static final int activity_horizontal_margin=0x7f050000;
+        public static final int activity_vertical_line_height=0x7f050002;
         public static final int activity_vertical_margin=0x7f050001;
+        public static final int line_width=0x7f050003;
+        public static final int siz1=0x7f050004;
+        public static final int siz2=0x7f050005;
+        public static final int siz3=0x7f050006;
+        public static final int siz4=0x7f050007;
+        public static final int siz5=0x7f050008;
+        public static final int siz6=0x7f050009;
+        public static final int siz7=0x7f05000a;
     }
     public static final class drawable {
         public static final int appicon=0x7f020000;
-        public static final int ic_launcher=0x7f020001;
-        public static final int ptr_flip=0x7f020002;
-        public static final int public_btnback_titlebar_nm=0x7f020003;
-        public static final int public_content_bg=0x7f020004;
-        public static final int public_icon_content_right=0x7f020005;
-        public static final int public_icon_tabbar_app_nm=0x7f020006;
-        public static final int public_icon_tabbar_app_pre=0x7f020007;
-        public static final int public_icon_tabbar_more_nm=0x7f020008;
-        public static final int public_icon_tabbar_more_pre=0x7f020009;
-        public static final int public_icon_tabbar_msg_nm=0x7f02000a;
-        public static final int public_icon_tabbar_msg_pre=0x7f02000b;
-        public static final int public_input_pre=0x7f02000c;
-        public static final int public_popup_bg=0x7f02000d;
-        public static final int public_tab_bg=0x7f02000e;
-        public static final int public_title_bg=0x7f02000f;
-        public static final int scrollbar_thumb_vertical=0x7f020010;
+        public static final int btn_back_background=0x7f020001;
+        public static final int btn_back_background_rectangle=0x7f020002;
+        public static final int ic_launcher=0x7f020003;
+        public static final int ptr_flip=0x7f020004;
+        public static final int public_add_titlebar=0x7f020005;
+        public static final int public_btnback_titlebar_nm=0x7f020006;
+        public static final int public_content_bg=0x7f020007;
+        public static final int public_icon_content_right=0x7f020008;
+        public static final int public_icon_tabbar_app_nm=0x7f020009;
+        public static final int public_icon_tabbar_app_pre=0x7f02000a;
+        public static final int public_icon_tabbar_more_nm=0x7f02000b;
+        public static final int public_icon_tabbar_more_pre=0x7f02000c;
+        public static final int public_icon_tabbar_msg_nm=0x7f02000d;
+        public static final int public_icon_tabbar_msg_pre=0x7f02000e;
+        public static final int public_input_pre=0x7f02000f;
+        public static final int public_popup_bg=0x7f020010;
+        public static final int public_tab_bg=0x7f020011;
+        public static final int public_title_bg=0x7f020012;
+        public static final int scrollbar_thumb_vertical=0x7f020013;
     }
     public static final class id {
-        public static final int action_settings=0x7f090015;
-        public static final int iv_list=0x7f090002;
-        public static final int iv_set=0x7f090005;
-        public static final int list_tab_layout=0x7f090001;
-        public static final int listview=0x7f09000a;
-        public static final int ll_main_tab=0x7f090000;
-        public static final int notify_tab_layout=0x7f090004;
-        public static final int rl_main_action_bar=0x7f090008;
-        public static final int textView1=0x7f09000b;
-        public static final int tv_msg=0x7f090003;
-        public static final int tv_set=0x7f090006;
-        public static final int tv_tab_name=0x7f090009;
-        public static final int vp_main=0x7f090007;
-        public static final int xlistview_footer_content=0x7f09000c;
-        public static final int xlistview_footer_hint_textview=0x7f09000e;
-        public static final int xlistview_footer_progressbar=0x7f09000d;
-        public static final int xlistview_header_arrow=0x7f090013;
-        public static final int xlistview_header_content=0x7f09000f;
-        public static final int xlistview_header_hint_textview=0x7f090011;
-        public static final int xlistview_header_progressbar=0x7f090014;
-        public static final int xlistview_header_text=0x7f090010;
-        public static final int xlistview_header_time=0x7f090012;
+        public static final int action_settings=0x7f090023;
+        public static final int back_icon=0x7f090000;
+        public static final int birthday=0x7f090018;
+        public static final int button1=0x7f090008;
+        public static final int contacts_ok_btn=0x7f090003;
+        public static final int contacts_ok_btn_layout=0x7f090002;
+        public static final int editText1=0x7f090005;
+        public static final int iv_list=0x7f09000b;
+        public static final int iv_set=0x7f09000e;
+        public static final int list_tab_layout=0x7f09000a;
+        public static final int listview=0x7f090014;
+        public static final int ll_main_tab=0x7f090009;
+        public static final int name=0x7f090016;
+        public static final int new_data=0x7f090013;
+        public static final int no=0x7f090015;
+        public static final int notify_tab_layout=0x7f09000d;
+        public static final int rl_main_action_bar=0x7f090011;
+        public static final int sex=0x7f090017;
+        public static final int spinner1=0x7f090006;
+        public static final int textView1=0x7f090004;
+        public static final int textView2=0x7f090007;
+        public static final int titlebar_title_name=0x7f090001;
+        public static final int tv_msg=0x7f09000c;
+        public static final int tv_set=0x7f09000f;
+        public static final int tv_tab_name=0x7f090012;
+        public static final int vistTime=0x7f090019;
+        public static final int vp_main=0x7f090010;
+        public static final int xlistview_footer_content=0x7f09001a;
+        public static final int xlistview_footer_hint_textview=0x7f09001c;
+        public static final int xlistview_footer_progressbar=0x7f09001b;
+        public static final int xlistview_header_arrow=0x7f090021;
+        public static final int xlistview_header_content=0x7f09001d;
+        public static final int xlistview_header_hint_textview=0x7f09001f;
+        public static final int xlistview_header_progressbar=0x7f090022;
+        public static final int xlistview_header_text=0x7f09001e;
+        public static final int xlistview_header_time=0x7f090020;
     }
     public static final class layout {
-        public static final int activity_main=0x7f030000;
-        public static final int fragment_notify=0x7f030001;
-        public static final int item_notify=0x7f030002;
-        public static final int xlistview_footer=0x7f030003;
-        public static final int xlistview_header=0x7f030004;
+        public static final int activity_input=0x7f030000;
+        public static final int activity_main=0x7f030001;
+        public static final int fragment_notify=0x7f030002;
+        public static final int item_notify=0x7f030003;
+        public static final int title_actionbar_view=0x7f030004;
+        public static final int xlistview_footer=0x7f030005;
+        public static final int xlistview_header=0x7f030006;
     }
     public static final class menu {
         public static final int home=0x7f080000;

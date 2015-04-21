@@ -3,6 +3,7 @@ package com.graduate.infocollect.activity;
 import java.util.ArrayList;
 import java.util.List;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
@@ -22,6 +23,7 @@ public class MainActivity extends FragmentActivity {
 	private ViewPager mViewPager;
 	private List<Fragment> mFragments;
 	private FragmentPagerAdapter mAdapter;
+	private ImageView new_data;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -33,6 +35,7 @@ public class MainActivity extends FragmentActivity {
 	
 	private void initView() {
 		mViewPager = (ViewPager)findViewById(R.id.vp_main);
+		new_data = (ImageView)findViewById(R.id.new_data);
 		mFragments = new ArrayList<Fragment>();
 		
 		DataListFragment dataFragment = new DataListFragment();
@@ -67,11 +70,13 @@ public class MainActivity extends FragmentActivity {
 						((TextView)findViewById(R.id.tv_tab_name)).setText("我的数据列表");
 						((ImageView)findViewById(R.id.iv_list)).setImageResource(R.drawable.public_icon_tabbar_more_pre);
 						((ImageView)findViewById(R.id.iv_set)).setImageResource(R.drawable.public_icon_tabbar_msg_nm);
+						new_data.setVisibility(View.VISIBLE);
 						break;
 					case 1:
 						((TextView)findViewById(R.id.tv_tab_name)).setText("我的提醒");
 						((ImageView)findViewById(R.id.iv_list)).setImageResource(R.drawable.public_icon_tabbar_more_nm);
 						((ImageView)findViewById(R.id.iv_set)).setImageResource(R.drawable.public_icon_tabbar_msg_pre);
+						new_data.setVisibility(View.GONE);
 						break;
 					
 					default:
@@ -107,6 +112,14 @@ public class MainActivity extends FragmentActivity {
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
 				mViewPager.setCurrentItem(1);
+			}
+		});
+		findViewById(R.id.new_data).setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				// TODO Auto-generated method stub
+				startActivity(new Intent(MainActivity.this, InputActivity.class));
 			}
 		});
 	}

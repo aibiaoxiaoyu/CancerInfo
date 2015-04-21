@@ -31,7 +31,9 @@ public class NotifyFragment extends Fragment {
 		mListview = (ListView)view.findViewById(R.id.listview);
 		// initView();
 		// initData();
-		mList.add(new NotifyEntity("-1", "time"));
+		mList.add(new NotifyEntity("-1", "-1", "time"));
+		mList.add(new NotifyEntity("0", "-1", "time"));
+		mList.add(new NotifyEntity("1", "-1", "time"));
 		mListview.setAdapter(new NotifyAdapter(mList));
 		return view;
 	}
@@ -68,18 +70,21 @@ public class NotifyFragment extends Fragment {
 			ViewHolder viewHolder = new ViewHolder();
 			if(convertView == null) {
 				convertView = mInflater.inflate(R.layout.item_notify, null);
-				// viewHolder.conv_name =
-				// ((TextView)convertView.findViewById(R.id.conv_name));
-				// viewHolder.conv_note =
-				// ((TextView)convertView.findViewById(R.id.conv_note));
-				// viewHolder.conv_date =
-				// ((TextView)convertView.findViewById(R.id.conv_date));
-				// viewHolder.conv_portrait =
-				// ((ImageView)convertView.findViewById(R.id.conv_portrait));
+				viewHolder.no = ((TextView)convertView.findViewById(R.id.no));
+				viewHolder.name = ((TextView)convertView.findViewById(R.id.name));
+				viewHolder.sex = ((TextView)convertView.findViewById(R.id.sex));
+				viewHolder.birthday = ((TextView)convertView.findViewById(R.id.birthday));
+				viewHolder.vistTime = ((TextView)convertView.findViewById(R.id.vistTime));
 				convertView.setTag(viewHolder);
 			}
 			else {
 				viewHolder = (ViewHolder)convertView.getTag();
+			}
+			NotifyEntity entity = mList.get(position);
+			if(!entity.getNo().equals("-1")) {
+				viewHolder.no.setText(position + "");
+				viewHolder.name.setText(entity.getVisitTime());
+				viewHolder.vistTime.setText(entity.getVisitTime());
 			}
 			return convertView;
 		}
@@ -87,9 +92,6 @@ public class NotifyFragment extends Fragment {
 	}
 	
 	private static class ViewHolder {
-		private TextView conv_name;
-		private TextView conv_note;
-		private TextView conv_date;
-		private ImageView conv_portrait;
+		private TextView no, name, sex, birthday, vistTime;
 	}
 }

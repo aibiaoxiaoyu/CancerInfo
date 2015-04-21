@@ -92,6 +92,15 @@
             android:text="我的数据列表"
             android:textColor="#ffffff"
             android:textSize="20dp" />
+
+        <ImageView
+            android:id="@+id/new_data"
+            android:layout_width="48dp"
+            android:layout_height="match_parent"
+            android:layout_alignParentRight="true"
+            android:background="@drawable/btn_back_background"
+            android:scaleType="center"
+            android:src="@drawable/public_add_titlebar" />
     </RelativeLayout>
 
 </RelativeLayout>
