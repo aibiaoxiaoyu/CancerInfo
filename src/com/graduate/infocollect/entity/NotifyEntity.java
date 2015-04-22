@@ -2,30 +2,30 @@ package com.graduate.infocollect.entity;
 
 public class NotifyEntity {
 	private String no;
-	private String userID;
+	private String contacID;
 	private String visitTime;
 	
-	public NotifyEntity(String no, String userID, String visitTime) {
+	public NotifyEntity(String no, String contacID, String visitTime) {
 		super();
 		this.no = no;
-		this.userID = userID;
+		this.contacID = contacID;
 		this.visitTime = visitTime;
 	}
 	
 	public String getNo() {
 		return no;
 	}
-
+	
 	public void setNo(String no) {
 		this.no = no;
 	}
-
-	public String getUserID() {
-		return userID;
+	
+	public String getContacID() {
+		return contacID;
 	}
 	
-	public void setUserID(String userID) {
-		this.userID = userID;
+	public void setContacID(String contacID) {
+		this.contacID = contacID;
 	}
 	
 	public String getVisitTime() {

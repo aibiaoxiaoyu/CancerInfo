@@ -82,7 +82,7 @@
                 android:textAppearance="?android:attr/textAppearanceMedium" />
 
             <EditText
-                android:id="@+id/editText1"
+                android:id="@+id/et_name"
                 android:layout_width="40dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="0.47"
@@ -105,7 +105,7 @@
                 android:textAppearance="?android:attr/textAppearanceMedium" />
 
             <Spinner
-                android:id="@+id/spinner1"
+                android:id="@+id/spinner"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1" />
@@ -123,14 +123,14 @@
                 android:textAppearance="?android:attr/textAppearanceMedium" />
 
             <TextView
-                android:id="@+id/textView2"
+                android:id="@+id/tv_birthday"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="1989-01-01"
                 android:textAppearance="?android:attr/textAppearanceMedium" />
 
             <Button
-                android:id="@+id/button1"
+                android:id="@+id/btn_selectdata"
                 style="?android:attr/buttonStyleSmall"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -164,6 +164,7 @@
                 android:textAppearance="?android:attr/textAppearanceMedium" />
 
             <EditText
+                android:id="@+id/et_ct"
                 android:layout_width="40dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="0.47"
@@ -186,6 +187,7 @@
                 android:textAppearance="?android:attr/textAppearanceMedium" />
 
             <EditText
+                android:id="@+id/et_psa"
                 android:layout_width="40dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="0.47"
