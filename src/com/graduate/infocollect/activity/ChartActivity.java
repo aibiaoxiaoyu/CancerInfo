@@ -15,7 +15,7 @@ import android.widget.FrameLayout;
 import android.widget.RelativeLayout;
 import android.widget.ZoomControls;
 
-public class ViewItemsActivity extends BaseActivity {
+public class ChartActivity extends BaseActivity {
 	// private ZoomControls mZoomControls;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {

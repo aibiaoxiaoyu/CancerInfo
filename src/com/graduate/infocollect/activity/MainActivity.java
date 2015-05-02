@@ -19,6 +19,13 @@ import com.graduate.cancerinfocollect.R;
 import com.graduate.infocollect.fragement.DataListFragment;
 import com.graduate.infocollect.fragement.NotifyFragment;
 
+/**
+ * @包名：com.graduate.infocollect.activity
+ * @类名：MainActivity
+ * @描述：主界面
+ * @作者：cmcc
+ * @版本：1.0.0
+ */
 public class MainActivity extends FragmentActivity {
 	private ViewPager mViewPager;
 	private List<Fragment> mFragments;
@@ -38,8 +45,8 @@ public class MainActivity extends FragmentActivity {
 		new_data = (ImageView)findViewById(R.id.new_data);
 		mFragments = new ArrayList<Fragment>();
 		
-		DataListFragment dataFragment = new DataListFragment();
-		NotifyFragment notifyFragment = new NotifyFragment();
+		DataListFragment dataFragment = new DataListFragment();// 我得数据列表
+		NotifyFragment notifyFragment = new NotifyFragment();// 我的提醒
 		
 		mFragments.add(dataFragment);
 		mFragments.add(notifyFragment);

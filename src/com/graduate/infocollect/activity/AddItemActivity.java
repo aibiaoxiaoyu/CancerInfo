@@ -16,8 +16,8 @@ public class AddItemActivity extends BaseActivity {
 		// TODO Auto-generated method stub
 		super.onDestroy();
 	}
-	public void onBack(View v) {
-		finish();
-	}
+//	public void onBack(View v) {
+//		finish();
+//	}
 	
 }

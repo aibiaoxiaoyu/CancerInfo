@@ -23,15 +23,19 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name="com.graduate.infocollect.activity.InputActivity" >
+        <activity
+            android:name="com.graduate.infocollect.activity.InputActivity"
+            android:windowSoftInputMode="stateUnchanged|adjustPan" >
         </activity>
-        <activity android:name="com.graduate.infocollect.activity.ViewItemsActivity" >
+        <activity android:name="com.graduate.infocollect.activity.ChartActivity" >
         </activity>
         <activity android:name="com.graduate.infocollect.activity.AddItemActivity" >
         </activity>
-        <activity android:name="com.graduate.infocollect.activity.ShowChartActivity" >
+        <activity android:name="com.graduate.infocollect.activity.ItemListActivity" >
         </activity>
         <activity android:name="com.graduate.infocollect.activity.HelpActivity" >
+        </activity>
+        <activity android:name="com.graduate.infocollect.activity.ProfileActivity" >
         </activity>
     </application>
 

@@ -144,7 +144,7 @@
                         android:textAppearance="?android:attr/textAppearanceMedium" />
 
                     <CheckBox
-                        android:id="@+id/checkBox1"
+                        android:id="@+id/cb_smoke"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="" />
@@ -156,7 +156,7 @@
                         android:textAppearance="?android:attr/textAppearanceMedium" />
 
                     <CheckBox
-                        android:id="@+id/checkBox1"
+                        android:id="@+id/cb_drink"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="" />
@@ -181,7 +181,7 @@
                         android:textAppearance="?android:attr/textAppearanceMedium" />
 
                     <Button
-                        android:id="@+id/btn_selectdata"
+                        android:id="@+id/btn_selectdate"
                         style="?android:attr/buttonStyleSmall"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -215,7 +215,7 @@
                         android:textAppearance="?android:attr/textAppearanceMedium" />
 
                     <CheckBox
-                        android:id="@+id/checkBox1"
+                        android:id="@+id/cb_normal"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:checked="true"
@@ -229,7 +229,8 @@
                         android:layout_weight="0.47"
                         android:ems="10"
                         android:hint="异常的详情"
-                        android:inputType="textPersonName" >
+                        android:inputType="textPersonName"
+                        android:visibility="invisible" >
                     </EditText>
                 </LinearLayout>
 
@@ -249,8 +250,10 @@
                         android:layout_width="40dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="0.47"
+                        android:digits=".0123456789"
                         android:ems="10"
-                        android:inputType="textPersonName" >
+                        android:imeOptions="actionNext"
+                        android:inputType="numberDecimal" >
                     </EditText>
                 </LinearLayout>
 
@@ -266,12 +269,14 @@
                         android:textAppearance="?android:attr/textAppearanceMedium" />
 
                     <EditText
-                        android:id="@+id/et_psa"
+                        android:id="@+id/et_ca"
                         android:layout_width="40dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="0.47"
+                        android:digits=".0123456789"
                         android:ems="10"
-                        android:inputType="textPersonName" >
+                        android:imeOptions="actionNext"
+                        android:inputType="numberDecimal" >
                     </EditText>
                 </LinearLayout>
 
@@ -287,12 +292,14 @@
                         android:textAppearance="?android:attr/textAppearanceMedium" />
 
                     <EditText
-                        android:id="@+id/et_psa"
+                        android:id="@+id/et_afp"
                         android:layout_width="40dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="0.47"
+                        android:digits=".0123456789"
                         android:ems="10"
-                        android:inputType="textPersonName" >
+                        android:imeOptions="actionNext"
+                        android:inputType="numberDecimal" >
                     </EditText>
                 </LinearLayout>
 
@@ -308,11 +315,12 @@
                         android:textAppearance="?android:attr/textAppearanceMedium" />
 
                     <EditText
-                        android:id="@+id/et_psa"
+                        android:id="@+id/et_history"
                         android:layout_width="40dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="0.47"
                         android:ems="10"
+                        android:imeOptions="actionDone"
                         android:inputType="textPersonName" >
                     </EditText>
                 </LinearLayout>

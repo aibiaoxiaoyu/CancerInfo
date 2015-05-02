@@ -30,7 +30,7 @@
                 android:layout_height="wrap_content"
                 android:layout_centerVertical="true"
                 android:layout_toRightOf="@id/back_icon"
-                android:text="帮助"
+                android:text="患者详情"
                 android:textColor="@color/cor1"
                 android:textSize="@dimen/siz1" />
         </RelativeLayout>
@@ -58,63 +58,53 @@
             android:orientation="vertical" >
 
             <TextView
-                android:id="@+id/textView1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="医疗信息输入参数讲解："
+                android:layout_marginTop="20dp"
+                android:text="姓名："
                 android:textAppearance="?android:attr/textAppearanceMedium" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
-                android:text="胸部CT："
+                android:text="性别： "
                 android:textAppearance="?android:attr/textAppearanceMedium" />
-
-            <TextView
-                android:id="@+id/textView3"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="胸部的CT是通过X线计算机体层摄影（CT）对胸部进行检查的一种方法，对早期肺癌有初步诊断作用。" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
-                android:text="血清PSA： "
+                android:text="出生年月： "
                 android:textAppearance="?android:attr/textAppearanceMedium" />
-
-            <TextView
-                android:id="@+id/textView2"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="血清PSA是前腺癌的特异性标志物，SA在大多数有临床意义的前列腺癌中都会升高，也是其最重要的早期检测指标。\n一般以PSA值大于4作为前列腺癌筛查的临界值。在PSA值大于4而小于10时，前列腺癌患病可能性为百分之30到百分之35.当PSA大于10时，患前列腺癌的可能性将大于百分之67，并且随PSA值的升高而升高。" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
-                android:text="CA 19-9： "
+                android:text="吸烟： "
                 android:textAppearance="?android:attr/textAppearanceMedium" />
-
-            <TextView
-                android:id="@+id/textView4"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="CA19-9是胰腺癌和结、直肠癌的标志物。\nCA19-9的定标标准值：0-40之间。\n胰腺癌、肝胆系癌、胃癌、结直肠癌的CA19-9水平分别是正常均值的683,535,279,120倍。而阳性率以胰腺癌为最高，故CA19-9是胰腺癌较好的标志。" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
-                android:text="AFP： "
+                android:text="饮酒： "
                 android:textAppearance="?android:attr/textAppearanceMedium" />
 
             <TextView
-                android:id="@+id/textView5"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="AFP是英文Alpha Fetal Protein三个字的缩写，意为甲种胎儿蛋白，简称甲胎蛋白或胎甲球。\nAFP就是肝癌最特异的标志物。因为肝脏本身就是个血池，只要有0.1～0.2厘米的癌块便可能在血液中发现AFP升高了。\nAFP的升降可作为判断肝癌预后或手术及各种抗癌治疗效果观察的指标：确诊肝癌后采取手术切除或各种治疗措施，AFP大幅度下降说明治疗有效，若下降后再次升高，则预示肝癌有复发、转移迹象。" />
+                android:layout_marginTop="20dp"
+                android:text="胸部CT： "
+                android:textAppearance="?android:attr/textAppearanceMedium" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:text="既往病史： "
+                android:textAppearance="?android:attr/textAppearanceMedium" />
         </LinearLayout>
     </ScrollView>
 

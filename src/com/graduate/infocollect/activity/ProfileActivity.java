@@ -1,14 +1,16 @@
 package com.graduate.infocollect.activity;
 
-import android.os.Bundle;
-import android.view.View;
+import com.graduate.cancerinfocollect.R;
 
-public class ShowChartActivity extends BaseActivity {
+import android.os.Bundle;
+
+public class ProfileActivity extends BaseActivity {
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
 		super.onCreate(savedInstanceState);
+		setContentView(R.layout.activity_profile);
 	}
 	
 	@Override
@@ -17,7 +19,4 @@ public class ShowChartActivity extends BaseActivity {
 		super.onDestroy();
 	}
 	
-	public void onBack(View v) {
-		finish();
-	}
 }

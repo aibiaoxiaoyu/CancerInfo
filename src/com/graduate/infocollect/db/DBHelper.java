@@ -11,11 +11,12 @@ import android.database.sqlite.SQLiteOpenHelper;
 
 import com.graduate.infocollect.InfoCollectApplication;
 import com.graduate.infocollect.entity.Contact;
+import com.graduate.infocollect.entity.MedicalData;
 
 public class DBHelper extends SQLiteOpenHelper {
 	
 	private final static String DATABASE_NAME = "db_canerInfoCollection";
-	private final static int DATABASE_VERSION = 1;
+	private final static int DATABASE_VERSION = 4;
 	private static DBHelper dbHelper;
 	
 	public DBHelper(Context context) {
@@ -27,10 +28,12 @@ public class DBHelper extends SQLiteOpenHelper {
 		// 创建数据库
 		// TODO Auto-generated method stub
 		String sql = "Create table " + InfoProvider.TABLE_CONTACT + "(" + InfoProvider.CONTACT_ID + " integer primary key autoincrement, "
-				+ InfoProvider.CONTACT_NAME + " text, " + InfoProvider.CONTACT_SEX + " text, " + InfoProvider.CONTACT_BIRTHDAY + " text );";
+				+ InfoProvider.CONTACT_NAME + " text, " + InfoProvider.CONTACT_IS_DRINK + " text, " + InfoProvider.CONTACT_IS_SMOKE + " text, "
+				+ InfoProvider.CONTACT_SEX + " text, " + InfoProvider.CONTACT_IS_CT_NORMAL + " text, " + InfoProvider.CONTACT_HISTORY + " text, "
+				+ InfoProvider.CONTACT_BIRTHDAY + " text );";
 		db.execSQL(sql);
 		sql = "Create table " + InfoProvider.TABLE_MEDICALDATA + "(" + InfoProvider.MEDICALDATA_ID + " integer primary key autoincrement, "
-				+ InfoProvider.MEDICALDATA_PSA + " text, " + InfoProvider.MEDICALDATA_CT + " text );";
+				+ InfoProvider.MEDICALDATA_PSA + " text, " + InfoProvider.MEDICALDATA_CA + " text, " + InfoProvider.MEDICALDATA_AFP + " text );";
 		db.execSQL(sql);
 		
 		sql = "Create table " + InfoProvider.TABLE_NOTIFY + "(" + InfoProvider.NOTIFY_ID + " integer primary key autoincrement, "
@@ -75,7 +78,28 @@ public class DBHelper extends SQLiteOpenHelper {
 				c.setId(cursor.getString(cursor.getColumnIndex(InfoProvider.CONTACT_ID)));
 				c.setSex(cursor.getInt(cursor.getColumnIndex(InfoProvider.CONTACT_SEX)));
 				c.setBirthday(cursor.getString(cursor.getColumnIndex(InfoProvider.CONTACT_BIRTHDAY)));
+				c.setCtNormal(cursor.getInt(cursor.getColumnIndex(InfoProvider.CONTACT_IS_CT_NORMAL)) == 1 ? true : false);
+				c.setSmork(cursor.getInt(cursor.getColumnIndex(InfoProvider.CONTACT_IS_SMOKE)) == 1 ? true : false);
+				c.setDrink(cursor.getInt(cursor.getColumnIndex(InfoProvider.CONTACT_IS_DRINK)) == 1 ? true : false);
 				mList.add(c);
+			}
+			cursor.close();
+		}
+		return mList;
+	}
+	
+	public List<MedicalData> getMedicalList(String contactID) {
+		SQLiteDatabase db = this.getWritableDatabase();
+		List<MedicalData> mList = new ArrayList<MedicalData>();
+		Cursor cursor = db.query(InfoProvider.TABLE_MEDICALDATA, null, InfoProvider.MEDICALDATA_ID + "=?", new String[] {contactID }, null, null,
+				null);
+		if(cursor != null) {
+			while(cursor.moveToNext()) {
+				MedicalData m = new MedicalData(contactID);
+				m.setAFP((cursor.getString(cursor.getColumnIndex(InfoProvider.MEDICALDATA_AFP))));
+				m.setCA((cursor.getString(cursor.getColumnIndex(InfoProvider.MEDICALDATA_CA))));
+				m.setPSA((cursor.getString(cursor.getColumnIndex(InfoProvider.MEDICALDATA_PSA))));
+				mList.add(m);
 			}
 			cursor.close();
 		}

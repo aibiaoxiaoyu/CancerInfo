@@ -16,10 +16,18 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import com.graduate.cancerinfocollect.R;
-import com.graduate.infocollect.activity.ViewItemsActivity;
+import com.graduate.infocollect.activity.ChartActivity;
+import com.graduate.infocollect.activity.ItemListActivity;
 import com.graduate.infocollect.db.DBHelper;
 import com.graduate.infocollect.entity.Contact;
 
+/**
+ * @包名：com.graduate.infocollect.fragement
+ * @类名：DataListFragment
+ * @描述：我的数据列表
+ * @作者：cmcc
+ * @版本：1.0.0
+ */
 public class DataListFragment extends Fragment {
 	private View view;
 	private ListView mListview;
@@ -35,8 +43,6 @@ public class DataListFragment extends Fragment {
 		view = inflater.inflate(R.layout.fragment_contact, container, false);
 		mListview = (ListView)view.findViewById(R.id.listview);
 		initData();
-		adapter = new ContactAdapter(mList);
-		mListview.setAdapter(adapter);
 		mListview.setOnItemClickListener(new OnItemClickListener() {
 			
 			@Override
@@ -44,11 +50,20 @@ public class DataListFragment extends Fragment {
 				// TODO Auto-generated method stub
 				if(position == 0)
 					return;
-				Intent intent = new Intent(getActivity(), ViewItemsActivity.class);
+				Intent intent = new Intent(getActivity(), ItemListActivity.class);
+				intent.putExtra(Contact.CONTACT, mList.get(position));
 				startActivity(intent);
 			}
 		});
 		return view;
+	}
+	
+	private void initData() {
+		mList.clear();
+		mList.add(new Contact("-1", "time"));
+		mList.addAll(DBHelper.getInstance().getContactList());
+		adapter = new ContactAdapter(mList);
+		mListview.setAdapter(adapter);
 	}
 	
 	@Override
@@ -58,12 +73,6 @@ public class DataListFragment extends Fragment {
 		initData();
 		adapter.notifyDataSetChanged();
 		
-	}
-	
-	private void initData() {
-		mList.clear();
-		mList.add(new Contact("-1", "time"));
-		mList.addAll(DBHelper.getInstance().getContactList());
 	}
 	
 	public class ContactAdapter extends BaseAdapter {
