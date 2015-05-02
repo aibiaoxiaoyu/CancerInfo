@@ -22,7 +22,7 @@ public class ChartActivity extends BaseActivity {
 		// TODO Auto-generated method stub
 		super.onCreate(savedInstanceState);
 		LayoutInflater factory = LayoutInflater.from(this);
-		View content = (View)factory.inflate(R.layout.activity_viewitems, null);
+		View content = (View)factory.inflate(R.layout.activity_chart, null);
 		
 		// 缩放控件放置在FrameLayout的上层，用于放大缩小图表
 		FrameLayout.LayoutParams frameParm = new FrameLayout.LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT);
