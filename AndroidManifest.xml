@@ -31,6 +31,8 @@
         </activity>
         <activity android:name="com.graduate.infocollect.activity.ShowChartActivity" >
         </activity>
+        <activity android:name="com.graduate.infocollect.activity.HelpActivity" >
+        </activity>
     </application>
 
 </manifest>
