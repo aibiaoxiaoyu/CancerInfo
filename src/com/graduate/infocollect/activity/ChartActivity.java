@@ -16,6 +16,15 @@ import android.widget.FrameLayout;
 import android.widget.RelativeLayout;
 import android.widget.ZoomControls;
 
+/**
+ * @包名：com.graduate.infocollect.activity
+ * @类名：ChartActivity
+ * @描述：chart界面
+ * @作者：cmcc
+ * @时间：May 7, 20159:40:01 PM
+ * @版本：1.0.0
+ * 
+*/
 public class ChartActivity extends BaseActivity {
 	// private ZoomControls mZoomControls;
 	@Override
@@ -29,14 +38,6 @@ public class ChartActivity extends BaseActivity {
 		FrameLayout.LayoutParams frameParm = new FrameLayout.LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT);
 		frameParm.gravity = Gravity.BOTTOM | Gravity.RIGHT;
 		
-		/*
-		//缩放控件放置在FrameLayout的上层，用于放大缩小图表
-		mZoomControls = new ZoomControls(this);
-		mZoomControls.setIsZoomInEnabled(true);
-		mZoomControls.setIsZoomOutEnabled(true);	  
-		mZoomControls.setLayoutParams(frameParm);  
-		*/
-		
 		// 图表显示范围在占屏幕大小的90%的区域内
 		DisplayMetrics dm = getResources().getDisplayMetrics();
 		int scrWidth = (int)(dm.widthPixels * 0.95);
@@ -47,20 +48,12 @@ public class ChartActivity extends BaseActivity {
 		layoutParams.addRule(RelativeLayout.CENTER_IN_PARENT);
 		// 图表view放入布局中，也可直接将图表view放入Activity对应的xml文件中
 		final RelativeLayout chartLayout = new RelativeLayout(this);
-//		 RelativeLayout chartLayout = (RelativeLayout)content.findViewById(R.id.rl);
 		
 		chartLayout.addView(new LineChartView(this,DBHelper.getInstance().getMedicalList(getIntent().getStringExtra("id"))), layoutParams);
 		
 		// 增加控件
 		((ViewGroup)content).addView(chartLayout);
-		// ((ViewGroup) content).addView(mZoomControls);
 		setContentView(content);
-		// 放大监听
-		// mZoomControls.setOnZoomInClickListener(new
-		// OnZoomInClickListenerImpl());
-		// 缩小监听
-		// mZoomControls.setOnZoomOutClickListener(new
-		// OnZoomOutClickListenerImpl());
 		
 	}
 	

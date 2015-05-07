@@ -1,8 +1,13 @@
 package com.graduate.infocollect.fragement;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 
+import android.app.DatePickerDialog;
+import android.app.Dialog;
+import android.app.DialogFragment;
+import android.content.ContentValues;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -11,14 +16,16 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
+import android.widget.AdapterView.OnItemLongClickListener;
 import android.widget.BaseAdapter;
+import android.widget.DatePicker;
 import android.widget.ListView;
 import android.widget.TextView;
 
 import com.graduate.cancerinfocollect.R;
-import com.graduate.infocollect.activity.ChartActivity;
 import com.graduate.infocollect.activity.ItemListActivity;
 import com.graduate.infocollect.db.DBHelper;
+import com.graduate.infocollect.db.InfoProvider;
 import com.graduate.infocollect.entity.Contact;
 
 /**
@@ -43,6 +50,19 @@ public class DataListFragment extends Fragment {
 		view = inflater.inflate(R.layout.fragment_contact, container, false);
 		mListview = (ListView)view.findViewById(R.id.listview);
 		initData();
+		mListview.setOnItemLongClickListener((new OnItemLongClickListener() {
+			
+			@Override
+			public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
+				// TODO Auto-generated method stub
+				if(position == 0)
+					return false;
+				SetDateDialog sdt = new SetDateDialog(mList.get(position).getId());
+				sdt.show(getActivity().getFragmentManager(), "datePicker");
+				return false;
+				
+			}
+		}));
 		mListview.setOnItemClickListener(new OnItemClickListener() {
 			
 			@Override
@@ -55,6 +75,7 @@ public class DataListFragment extends Fragment {
 				startActivity(intent);
 			}
 		});
+		
 		return view;
 	}
 	
@@ -73,6 +94,36 @@ public class DataListFragment extends Fragment {
 		initData();
 		adapter.notifyDataSetChanged();
 		
+	}
+	
+	// 创建日期选择对话框
+	class SetDateDialog extends DialogFragment implements DatePickerDialog.OnDateSetListener {
+		private String contactID;
+		
+		public SetDateDialog(String contactID) {
+			super();
+			this.contactID = contactID;
+		}
+		
+		public Dialog onCreateDialog(Bundle savedInstanceState) {
+			// Calendar 是一个抽象类，是通过getInstance()来获得实例,设置成系统默认时间
+			final Calendar c = Calendar.getInstance();
+			// 获取年，月，日
+			int year = c.get(Calendar.YEAR);
+			int month = c.get(Calendar.MONTH);
+			int day = c.get(Calendar.DAY_OF_MONTH);
+			
+			DatePickerDialog dpd = new DatePickerDialog(getActivity(), this, year, month, day);
+			dpd.setTitle("添加提醒");
+			return dpd;
+		}
+		
+		public void onDateSet(DatePicker view, int year, int month, int day) {
+			ContentValues cv = new ContentValues();
+			cv.put(InfoProvider.NOTIFY_VISTTIME, year + "-" + (month + 1) + "-" + day + "");
+			cv.put(InfoProvider.NOTIFY_CONTACTID, contactID);
+			DBHelper.getInstance().insert(InfoProvider.TABLE_NOTIFY, cv);
+		}
 	}
 	
 	public class ContactAdapter extends BaseAdapter {

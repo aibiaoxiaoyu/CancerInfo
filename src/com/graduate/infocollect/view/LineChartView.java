@@ -33,15 +33,13 @@ import org.xclcharts.renderer.XChart;
 import org.xclcharts.renderer.XEnum;
 import org.xclcharts.renderer.info.AnchorDataPoint;
 
-import com.graduate.infocollect.db.DBHelper;
-import com.graduate.infocollect.entity.MedicalData;
-
 import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Color;
-import android.util.AttributeSet;
 import android.util.Log;
 import android.view.MotionEvent;
+
+import com.graduate.infocollect.entity.MedicalData;
 
 public class LineChartView extends BaseChartView implements Runnable {
 	
@@ -65,20 +63,9 @@ public class LineChartView extends BaseChartView implements Runnable {
 		initView();
 	}
 	
-	// public LineChartView(Context context, AttributeSet attrs) {
-	// super(context, attrs);
-	// initView();
-	// }
-	//
-	// public LineChartView(Context context, AttributeSet attrs, int defStyle) {
-	// super(context, attrs, defStyle);
-	// initView();
-	// }
-	
 	private void initView() {
 		chartLabels();
 		chartDataSet();
-		chartDesireLines();
 		chartRender();
 		new Thread(this).start();
 	}
@@ -100,7 +87,7 @@ public class LineChartView extends BaseChartView implements Runnable {
 			// 设定数据源
 			chart.setCategories(labels);
 			// chart.setDataSource(chartData);
-			// chart.setCustomLines(mCustomLineDataset);
+			chart.setCustomLines(mCustomLineDataset);
 			
 			// 数据轴最大值
 			chart.getDataAxis().setAxisMax(200);
@@ -155,7 +142,6 @@ public class LineChartView extends BaseChartView implements Runnable {
 				}
 			});
 			
-			// chart.setItemLabelFormatter(callBack)
 			
 			// 允许线与轴交叉时，线会断开
 			chart.setLineAxisIntersectVisible(false);
@@ -178,15 +164,6 @@ public class LineChartView extends BaseChartView implements Runnable {
 		}
 	}
 	
-	// // 计算下平均线
-	// private double calcAvg() {
-	// double total = 400d + 480d + 500d + 560d + 800d + 950d + 1200d + 630d +
-	// 710d;
-	// double yearNumber = 9d;
-	//
-	// return(total / yearNumber);
-	// }
-	
 	private void chartDataSet() {
 		// Line 1
 		LinkedList<Double> dataSeries1 = new LinkedList<Double>();
@@ -194,99 +171,36 @@ public class LineChartView extends BaseChartView implements Runnable {
 		for(MedicalData md : mList) {
 			dataSeries1.add(Double.valueOf(md.getPSA()));
 		}
-		// dataSeries1.add(480d);
-		// dataSeries1.add(500d);
-		// dataSeries1.add(560d);
 		LineData lineData1 = new LineData("血清PSA", dataSeries1, Color.rgb(234, 83, 71));
 		lineData1.setDotStyle(XEnum.DotStyle.DOT);
 		
 		// Line 2
 		LinkedList<Double> dataSeries2 = new LinkedList<Double>();
 		dataSeries2.add(0d);
-		// dataSeries2.add(0d);
-		// dataSeries2.add(0d);
-		// dataSeries2.add(0d);
-		// dataSeries2.add((double)800);
-		// dataSeries2.add((double)950);
-		// dataSeries2.add((double)1200);
 		for(MedicalData md : mList) {
 			dataSeries2.add(Double.valueOf(md.getCA()));
 		}
 		
 		LineData lineData2 = new LineData("CA 19-9", dataSeries2, Color.rgb(75, 166, 51));
 		lineData2.setDotStyle(XEnum.DotStyle.PRISMATIC);
-		// lineData2.getPlotLine().getDotPaint().setColor(Color.rgb(76, 76,
-		// 76));
-		// lineData2.getDotLabelPaint().setColor(Color.rgb(234, 142, 43));
-		// lineData2.setLabelVisible(true);
-		// lineData2.getLabelOptions().getBox().getBackgroundPaint().setColor(Color.rgb(76,
-		// 76, 76));
-		// lineData2.getPlotLabel().hideBox();
 		
 		// Line 3
 		LinkedList<Double> dataSeries3 = new LinkedList<Double>();
 		dataSeries3.add(0d);
-		// dataSeries3.add(0d);
-		// dataSeries3.add(0d);
-		// dataSeries3.add(0d);
-		// dataSeries3.add(0d);
-		// dataSeries3.add(0d);
-		// dataSeries3.add(0d);
-		// dataSeries3.add(630d);
-		// dataSeries3.add(710d);
 		for(MedicalData md : mList) {
 			dataSeries3.add(Double.valueOf(md.getAFP()));
 		}
 		LineData lineData3 = new LineData("AFP", dataSeries3, Color.rgb(123, 89, 168));
 		lineData3.setDotStyle(XEnum.DotStyle.DOT);
 		
-		// 轴上分界线的交叉点
-		// LinkedList<Double> dataSeries4 = new LinkedList<Double>();
-		// dataSeries4.add(1500d);
-		// LinkedList<Double> dataSeries5 = new LinkedList<Double>();
-		// dataSeries5.add(3000d);
-		// LinkedList<Double> dataSeries6 = new LinkedList<Double>();
-		// dataSeries6.add(calcAvg());
-		
-		// LineData lineData4 = new LineData("", dataSeries4, Color.rgb(35, 172,
-		// 57));
-		// lineData4.setDotStyle(XEnum.DotStyle.RECT);
-		// LineData lineData5 = new LineData("", dataSeries5, Color.rgb(69, 181,
-		// 248));
-		// lineData5.setDotStyle(XEnum.DotStyle.RECT);
-		// LineData lineData6 = new LineData("", dataSeries6, Color.rgb(251, 79,
-		// 128));
-		// lineData6.setDotStyle(XEnum.DotStyle.TRIANGLE);
-		
 		chartData.add(lineData1);
 		chartData.add(lineData2);
 		chartData.add(lineData3);
 		
-		// chartData.add(lineData4);
-		// chartData.add(lineData5);
-		// chartData.add(lineData6);
-		
-		// 批注
-		// List<AnchorDataPoint> mAnchorSet = new ArrayList<AnchorDataPoint>();
-		// AnchorDataPoint an4 = new AnchorDataPoint(0, 2,
-		// XEnum.AnchorStyle.CAPRECT);
-		// an4.setAnchor("批注");
-		// an4.setBgColor(Color.rgb(255, 145, 126));
-		// mAnchorSet.add(an4);
 		chart.setAnchorDataPoint(mAnchorSet);
 	}
 	
 	private void chartLabels() {
-//		 labels.add("2014-7");
-//		 labels.add("2014-8");
-//		 labels.add("2014-9");
-//		 labels.add("2014-10");
-//		 labels.add("2014-11");
-//		 labels.add("2014-12");
-//		 labels.add("2015-1");
-//		 labels.add("2015-2");
-//		 labels.add("2015-3");
-//		 labels.add("2015-4");
 		int i = 0;
 		labels.add(String.valueOf(0));
 		for(MedicalData md : mList) {
@@ -294,18 +208,6 @@ public class LineChartView extends BaseChartView implements Runnable {
 		}
 		labels.add(String.valueOf(++i));
 		
-	}
-	
-	/**
-	 * 期望线/分界线
-	 */
-	private void chartDesireLines() {
-		// mCustomLineDataset.add(new CustomLineData("稍好", 1500d, Color.rgb(35,
-		// 172, 57), 5));
-		// mCustomLineDataset.add(new CustomLineData("舒适", 3000d, Color.rgb(69,
-		// 181, 248), 5));
-		// mCustomLineDataset.add(new CustomLineData("[个人均线]", calcAvg(),
-		// Color.rgb(251, 79, 128), 6));
 	}
 	
 	@Override

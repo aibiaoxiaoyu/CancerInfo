@@ -32,6 +32,8 @@ public class MainActivity extends FragmentActivity {
 	private FragmentPagerAdapter mAdapter;
 	private ImageView new_data;
 	
+	DataListFragment dataFragment = new DataListFragment();// 我的数据列表
+	NotifyFragment notifyFragment = new NotifyFragment();// 我的提醒
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -44,9 +46,7 @@ public class MainActivity extends FragmentActivity {
 		mViewPager = (ViewPager)findViewById(R.id.vp_main);
 		new_data = (ImageView)findViewById(R.id.new_data);
 		mFragments = new ArrayList<Fragment>();
-		
-		DataListFragment dataFragment = new DataListFragment();// 我得数据列表
-		NotifyFragment notifyFragment = new NotifyFragment();// 我的提醒
+	
 		
 		mFragments.add(dataFragment);
 		mFragments.add(notifyFragment);
@@ -84,6 +84,7 @@ public class MainActivity extends FragmentActivity {
 						((ImageView)findViewById(R.id.iv_list)).setImageResource(R.drawable.public_icon_tabbar_more_nm);
 						((ImageView)findViewById(R.id.iv_set)).setImageResource(R.drawable.public_icon_tabbar_msg_pre);
 						new_data.setVisibility(View.GONE);
+						notifyFragment.onResume();
 						break;
 					
 					default:

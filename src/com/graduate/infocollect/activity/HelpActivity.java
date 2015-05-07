@@ -5,6 +5,13 @@ import com.graduate.cancerinfocollect.R;
 import android.os.Bundle;
 import android.view.View;
 
+/**
+ * @包名：com.graduate.infocollect.activity
+ * @类名：HelpActivity
+ * @描述：help 界面
+ * @版本：1.0.0
+ * 
+*/
 public class HelpActivity extends BaseActivity {
 	
 	@Override

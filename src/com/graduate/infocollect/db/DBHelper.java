@@ -1,7 +1,9 @@
 package com.graduate.infocollect.db;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import android.content.ContentValues;
 import android.content.Context;
@@ -12,11 +14,12 @@ import android.database.sqlite.SQLiteOpenHelper;
 import com.graduate.infocollect.InfoCollectApplication;
 import com.graduate.infocollect.entity.Contact;
 import com.graduate.infocollect.entity.MedicalData;
+import com.graduate.infocollect.entity.NotifyEntity;
 
 public class DBHelper extends SQLiteOpenHelper {
 	
 	private final static String DATABASE_NAME = "db_canerInfoCollection";
-	private final static int DATABASE_VERSION = 4;
+	private final static int DATABASE_VERSION = 1;
 	private static DBHelper dbHelper;
 	
 	public DBHelper(Context context) {
@@ -33,7 +36,8 @@ public class DBHelper extends SQLiteOpenHelper {
 				+ InfoProvider.CONTACT_BIRTHDAY + " text );";
 		db.execSQL(sql);
 		sql = "Create table " + InfoProvider.TABLE_MEDICALDATA + "(" + InfoProvider.MEDICALDATA_ID + " integer primary key autoincrement, "
-				+ InfoProvider.MEDICALDATA_PSA + " text, " + InfoProvider.MEDICALDATA_CA + " text, " + InfoProvider.MEDICALDATA_AFP + " text );";
+				+ InfoProvider.MEDICALDATA_PSA + " text, " + InfoProvider.MEDICALDATA_CONTACT_ID + " text, " + InfoProvider.MEDICALDATA_CA
+				+ " text, " + InfoProvider.MEDICALDATA_AFP + " text );";
 		db.execSQL(sql);
 		
 		sql = "Create table " + InfoProvider.TABLE_NOTIFY + "(" + InfoProvider.NOTIFY_ID + " integer primary key autoincrement, "
@@ -89,17 +93,59 @@ public class DBHelper extends SQLiteOpenHelper {
 		return mList;
 	}
 	
+	public Map<String, Contact> getContactMap() {
+		SQLiteDatabase db = this.getWritableDatabase();
+		Map<String, Contact> map = new HashMap<String, Contact>();
+		Cursor cursor = db.query(InfoProvider.TABLE_CONTACT, null, null, null, null, null, null);
+		if(cursor != null) {
+			while(cursor.moveToNext()) {
+				Contact c = new Contact();
+				c.setName(cursor.getString(cursor.getColumnIndex(InfoProvider.CONTACT_NAME)));
+				c.setId(cursor.getString(cursor.getColumnIndex(InfoProvider.CONTACT_ID)));
+				c.setSex(cursor.getInt(cursor.getColumnIndex(InfoProvider.CONTACT_SEX)));
+				c.setBirthday(cursor.getString(cursor.getColumnIndex(InfoProvider.CONTACT_BIRTHDAY)));
+				c.setCtNormal(cursor.getInt(cursor.getColumnIndex(InfoProvider.CONTACT_IS_CT_NORMAL)) == 1 ? true : false);
+				c.setSmork(cursor.getInt(cursor.getColumnIndex(InfoProvider.CONTACT_IS_SMOKE)) == 1 ? true : false);
+				c.setDrink(cursor.getInt(cursor.getColumnIndex(InfoProvider.CONTACT_IS_DRINK)) == 1 ? true : false);
+				c.setHistory((cursor.getString(cursor.getColumnIndex(InfoProvider.CONTACT_HISTORY))));
+				map.put(c.getId(), c);
+			}
+			cursor.close();
+		}
+		return map;
+	}
+	
 	public List<MedicalData> getMedicalList(String contactID) {
 		SQLiteDatabase db = this.getWritableDatabase();
 		List<MedicalData> mList = new ArrayList<MedicalData>();
-		Cursor cursor = db.query(InfoProvider.TABLE_MEDICALDATA, null, InfoProvider.MEDICALDATA_ID + "=?", new String[] {contactID }, null, null,
-				null);
+		Cursor cursor = db.query(InfoProvider.TABLE_MEDICALDATA, null, InfoProvider.MEDICALDATA_CONTACT_ID + "=?", new String[] {contactID }, null,
+				null, null);
 		if(cursor != null) {
 			while(cursor.moveToNext()) {
 				MedicalData m = new MedicalData(contactID);
 				m.setAFP((cursor.getString(cursor.getColumnIndex(InfoProvider.MEDICALDATA_AFP))));
 				m.setCA((cursor.getString(cursor.getColumnIndex(InfoProvider.MEDICALDATA_CA))));
 				m.setPSA((cursor.getString(cursor.getColumnIndex(InfoProvider.MEDICALDATA_PSA))));
+				mList.add(m);
+			}
+			cursor.close();
+		}
+		return mList;
+	}
+	
+	public List<NotifyEntity> getNotifyList() {
+		SQLiteDatabase db = this.getWritableDatabase();
+		List<NotifyEntity> mList = new ArrayList<NotifyEntity>();
+		// Cursor cursor = db.query(InfoProvider.TABLE_NOTIFY, null,
+		// InfoProvider.NOTIFY_CONTACTID + "=?", new String[] {contactID },
+		// null, null, null);
+		Cursor cursor = db.query(InfoProvider.TABLE_NOTIFY, null, null, null, null, null, null);
+		if(cursor != null) {
+			while(cursor.moveToNext()) {
+				NotifyEntity m = new NotifyEntity();
+				m.setNo((cursor.getString(cursor.getColumnIndex(InfoProvider.NOTIFY_CONTACTID))));
+				m.setContacID((cursor.getString(cursor.getColumnIndex(InfoProvider.NOTIFY_CONTACTID))));
+				m.setVisitTime((cursor.getString(cursor.getColumnIndex(InfoProvider.NOTIFY_VISTTIME))));
 				mList.add(m);
 			}
 			cursor.close();

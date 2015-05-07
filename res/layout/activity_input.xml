@@ -186,6 +186,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:background="@null"
+                        android:onClick="onSetDateClick"
                         android:text="选择"
                         android:textColor="@color/cor5" />
                 </LinearLayout>

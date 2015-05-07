@@ -1,5 +1,10 @@
 package com.graduate.infocollect.activity;
 
+import java.util.Calendar;
+
+import android.app.DatePickerDialog;
+import android.app.Dialog;
+import android.app.DialogFragment;
 import android.content.ContentValues;
 import android.content.Intent;
 import android.os.Bundle;
@@ -7,6 +12,7 @@ import android.text.TextUtils;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.CheckBox;
+import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.TextView;
@@ -55,6 +61,12 @@ public class InputActivity extends BaseActivity {
 		birthday = (TextView)findViewById(R.id.tv_birthday);
 	}
 	
+	// 设置日期事件处理方法
+	public void onSetDateClick(View v) {
+		SetDateDialog sdt = new SetDateDialog();
+		sdt.show(getFragmentManager(), "datePicker");
+	}
+	
 	/**
 	 * @方法名：saveData
 	 * @描述：保存数据
@@ -85,7 +97,7 @@ public class InputActivity extends BaseActivity {
 		int id = (int)DBHelper.getInstance().insert(InfoProvider.TABLE_CONTACT, cv);// id
 		
 		cv = new ContentValues();
-		cv.put(InfoProvider.MEDICALDATA_ID, id);
+		cv.put(InfoProvider.MEDICALDATA_CONTACT_ID, id);
 		cv.put(InfoProvider.MEDICALDATA_PSA, psaString);
 		cv.put(InfoProvider.MEDICALDATA_CA, caString);
 		cv.put(InfoProvider.MEDICALDATA_AFP, afpString);
@@ -135,6 +147,27 @@ public class InputActivity extends BaseActivity {
 	 */
 	public void onOK(View v) {
 		saveData();
+	}
+	
+	// 创建日期选择对话框
+	class SetDateDialog extends DialogFragment implements DatePickerDialog.OnDateSetListener {
+		
+		public Dialog onCreateDialog(Bundle savedInstanceState) {
+			// Calendar 是一个抽象类，是通过getInstance()来获得实例,设置成系统默认时间
+			final Calendar c = Calendar.getInstance();
+			// 获取年，月，日
+			int year = c.get(Calendar.YEAR);
+			int month = c.get(Calendar.MONTH);
+			int day = c.get(Calendar.DAY_OF_MONTH);
+			
+			DatePickerDialog dpd = new DatePickerDialog(getActivity(), this, year, month, day);
+			dpd.setTitle("设置生日");
+			return dpd;
+		}
+		
+		public void onDateSet(DatePicker view, int year, int month, int day) {
+			birthday.setText(year + "-" + (month + 1) + "-" + day + "");
+		}
 	}
 	
 }

@@ -14,6 +14,7 @@ public class InfoProvider {
 	
 	public final static String TABLE_MEDICALDATA = "MedicalDataact";
 	public final static String MEDICALDATA_ID = "_id";
+	public final static String MEDICALDATA_CONTACT_ID = "_contact_id";
 	public final static String MEDICALDATA_PSA = "_psa";
 	public final static String MEDICALDATA_CA = "_ca";
 	public final static String MEDICALDATA_AFP = "_afp";

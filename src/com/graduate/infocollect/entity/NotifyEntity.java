@@ -5,6 +5,9 @@ public class NotifyEntity {
 	private String contacID;
 	private String visitTime;
 	
+	public NotifyEntity() {
+		super();
+	}
 	public NotifyEntity(String no, String contacID, String visitTime) {
 		super();
 		this.no = no;

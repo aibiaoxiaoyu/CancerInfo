@@ -45,12 +45,41 @@ public class ItemListActivity extends BaseActivity {
 		
 	}
 	
+	/**
+	 * @方法名：onShowProfile
+	 * @描述：显示患者详情
+	 * @param v
+	 * @输出：void
+	 * @作者：cmcc
+	 * 
+	*/
 	public void onShowProfile(View v) {
 		Intent intent = new Intent(ItemListActivity.this, ProfileActivity.class);
 		intent.putExtra(Contact.CONTACT, contact);
 		startActivity(intent);
 	}
 	
+	/**
+	 * @方法名：onAddItem
+	 * @描述：新建数据
+	 * @param v
+	 * @输出：void
+	 * @作者：cmcc
+	 * 
+	*/
+	public void onAddItem(View v) {
+		Intent intent = new Intent(ItemListActivity.this, AddItemActivity.class);
+		intent.putExtra("id", contact.getId());
+		startActivity(intent);
+	}
+	/**
+	 * @方法名：onShowChart
+	 * @描述：显示chart
+	 * @param v
+	 * @输出：void
+	 * @作者：cmcc
+	 * 
+	*/
 	public void onShowChart(View v) {
 		if(mList.size() <= 1) {
 			return;

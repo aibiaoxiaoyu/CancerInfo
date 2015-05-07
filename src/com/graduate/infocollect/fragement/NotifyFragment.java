@@ -2,6 +2,7 @@ package com.graduate.infocollect.fragement;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -14,6 +15,8 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import com.graduate.cancerinfocollect.R;
+import com.graduate.infocollect.db.DBHelper;
+import com.graduate.infocollect.entity.Contact;
 import com.graduate.infocollect.entity.NotifyEntity;
 
 public class NotifyFragment extends Fragment {
@@ -21,6 +24,8 @@ public class NotifyFragment extends Fragment {
 	private ListView mListview;
 	private List<NotifyEntity> mList = new ArrayList<NotifyEntity>();
 	private LayoutInflater mInflater;
+	private Map<String, Contact> map;
+	private NotifyAdapter adapter;
 	
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -29,13 +34,23 @@ public class NotifyFragment extends Fragment {
 		mInflater = inflater;
 		view = inflater.inflate(R.layout.fragment_notify, container, false);
 		mListview = (ListView)view.findViewById(R.id.listview);
-		// initView();
-		// initData();
-		mList.add(new NotifyEntity("-1", "-1", "time"));
-		mList.add(new NotifyEntity("0", "-1", "time"));
-		mList.add(new NotifyEntity("1", "-1", "time"));
-		mListview.setAdapter(new NotifyAdapter(mList));
+		map = DBHelper.getInstance().getContactMap();
+//		mList.clear();
+//		mList.add(new NotifyEntity("-1", "-1", "time"));
+//		mList.addAll(DBHelper.getInstance().getNotifyList());
+		adapter = new NotifyAdapter(mList);
+		mListview.setAdapter(adapter);
 		return view;
+	}
+	
+	@Override
+	public void onResume() {
+		// TODO Auto-generated method stub
+		super.onResume();
+		mList.clear();
+		mList.add(new NotifyEntity("-1", "-1", "time"));
+		mList.addAll(DBHelper.getInstance().getNotifyList());
+		adapter.notifyDataSetChanged();
 	}
 	
 	public class NotifyAdapter extends BaseAdapter {
@@ -81,10 +96,12 @@ public class NotifyFragment extends Fragment {
 				viewHolder = (ViewHolder)convertView.getTag();
 			}
 			NotifyEntity entity = mList.get(position);
-			if(!entity.getNo().equals("-1")) {
+			if(entity != null && !entity.getNo().equals("-1")) {
 				viewHolder.no.setText(position + "");
-				viewHolder.name.setText(entity.getVisitTime());
+				viewHolder.name.setText(map.get(entity.getContacID()).getName());
+				viewHolder.sex.setText(map.get(entity.getContacID()).getSex() == Contact.SEX_MAN ? "男" : "女");
 				viewHolder.vistTime.setText(entity.getVisitTime());
+				viewHolder.birthday.setText(map.get(entity.getContacID()).getBirthday());
 			}
 			return convertView;
 		}
