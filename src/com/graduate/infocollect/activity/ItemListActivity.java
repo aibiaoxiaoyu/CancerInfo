@@ -47,6 +47,7 @@ public class ItemListActivity extends BaseActivity {
 	
 	public void onShowProfile(View v) {
 		Intent intent = new Intent(ItemListActivity.this, ProfileActivity.class);
+		intent.putExtra(Contact.CONTACT, contact);
 		startActivity(intent);
 	}
 	
@@ -55,6 +56,7 @@ public class ItemListActivity extends BaseActivity {
 			return;
 		}
 		Intent intent = new Intent(ItemListActivity.this, ChartActivity.class);
+		intent.putExtra("id", contact.getId());
 		startActivity(intent);
 	}
 	

@@ -19,6 +19,15 @@ public class Contact implements Serializable {
 	private boolean smork;
 	private boolean drink;
 	private boolean ctNormal;
+	private String history;
+	
+	public String getHistory() {
+		return history;
+	}
+	
+	public void setHistory(String history) {
+		this.history = history;
+	}
 	
 	public Contact() {
 		super();
@@ -37,27 +46,27 @@ public class Contact implements Serializable {
 	public boolean isSmork() {
 		return smork;
 	}
-
+	
 	public void setSmork(boolean smork) {
 		this.smork = smork;
 	}
-
+	
 	public boolean isDrink() {
 		return drink;
 	}
-
+	
 	public void setDrink(boolean drink) {
 		this.drink = drink;
 	}
-
+	
 	public boolean isCtNormal() {
 		return ctNormal;
 	}
-
+	
 	public void setCtNormal(boolean ctNormal) {
 		this.ctNormal = ctNormal;
 	}
-
+	
 	public void setId(String id) {
 		this.id = id;
 	}

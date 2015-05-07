@@ -1,6 +1,7 @@
 package com.graduate.infocollect.activity;
 
 import com.graduate.cancerinfocollect.R;
+import com.graduate.infocollect.db.DBHelper;
 import com.graduate.infocollect.view.LineChartView;
 
 import android.app.Activity;
@@ -48,7 +49,7 @@ public class ChartActivity extends BaseActivity {
 		final RelativeLayout chartLayout = new RelativeLayout(this);
 //		 RelativeLayout chartLayout = (RelativeLayout)content.findViewById(R.id.rl);
 		
-		chartLayout.addView(new LineChartView(this), layoutParams);
+		chartLayout.addView(new LineChartView(this,DBHelper.getInstance().getMedicalList(getIntent().getStringExtra("id"))), layoutParams);
 		
 		// 增加控件
 		((ViewGroup)content).addView(chartLayout);

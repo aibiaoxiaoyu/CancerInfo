@@ -81,6 +81,7 @@ public class DBHelper extends SQLiteOpenHelper {
 				c.setCtNormal(cursor.getInt(cursor.getColumnIndex(InfoProvider.CONTACT_IS_CT_NORMAL)) == 1 ? true : false);
 				c.setSmork(cursor.getInt(cursor.getColumnIndex(InfoProvider.CONTACT_IS_SMOKE)) == 1 ? true : false);
 				c.setDrink(cursor.getInt(cursor.getColumnIndex(InfoProvider.CONTACT_IS_DRINK)) == 1 ? true : false);
+				c.setHistory((cursor.getString(cursor.getColumnIndex(InfoProvider.CONTACT_HISTORY))));
 				mList.add(c);
 			}
 			cursor.close();
