@@ -34,7 +34,6 @@ public class NotifyFragment extends Fragment {
 		mInflater = inflater;
 		view = inflater.inflate(R.layout.fragment_notify, container, false);
 		mListview = (ListView)view.findViewById(R.id.listview);
-		map = DBHelper.getInstance().getContactMap();
 //		mList.clear();
 //		mList.add(new NotifyEntity("-1", "-1", "time"));
 //		mList.addAll(DBHelper.getInstance().getNotifyList());
@@ -50,6 +49,7 @@ public class NotifyFragment extends Fragment {
 		mList.clear();
 		mList.add(new NotifyEntity("-1", "-1", "time"));
 		mList.addAll(DBHelper.getInstance().getNotifyList());
+		map = DBHelper.getInstance().getContactMap();
 		adapter.notifyDataSetChanged();
 	}
 	
