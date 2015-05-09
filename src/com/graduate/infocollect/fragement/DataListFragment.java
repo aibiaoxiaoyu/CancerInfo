@@ -55,6 +55,7 @@ public class DataListFragment extends Fragment {
 			@Override
 			public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
 				// TODO Auto-generated method stub
+				System.out.println("onItemLongClick");
 				if(position == 0)
 					return false;
 				SetDateDialog sdt = new SetDateDialog(mList.get(position).getId());
@@ -68,6 +69,7 @@ public class DataListFragment extends Fragment {
 			@Override
 			public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 				// TODO Auto-generated method stub
+				System.out.println("setOnItemClickListener");
 				if(position == 0)
 					return;
 				Intent intent = new Intent(getActivity(), ItemListActivity.class);

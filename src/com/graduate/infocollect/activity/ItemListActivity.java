@@ -18,6 +18,15 @@ import com.graduate.infocollect.db.DBHelper;
 import com.graduate.infocollect.entity.Contact;
 import com.graduate.infocollect.entity.MedicalData;
 
+/**
+ * @包名：com.graduate.infocollect.activity
+ * @类名：ItemListActivity
+ * @描述：患者 医疗数据的列表
+ * @作者：cmcc
+ * @时间：May 9, 201510:23:41 PM
+ * @版本：1.0.0
+ * 
+*/
 public class ItemListActivity extends BaseActivity {
 	private ListView mListview;
 	private List<MedicalData> mList = new ArrayList<MedicalData>();
