@@ -1,6 +1,9 @@
 package com.graduate.infocollect.db;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -71,6 +74,21 @@ public class DBHelper extends SQLiteOpenHelper {
 		return row;
 	}
 	
+	public void updateMedial(String id, ContentValues cv) {
+		SQLiteDatabase db = this.getWritableDatabase();
+		long row = db.update(InfoProvider.TABLE_MEDICALDATA, cv, InfoProvider.MEDICALDATA_ID + "=?", new String[] {id });
+	}
+	
+	public void deleteNotifyEntity(String id) {
+		SQLiteDatabase db = this.getWritableDatabase();
+		long row = db.delete(InfoProvider.TABLE_NOTIFY, InfoProvider.NOTIFY_ID + "=?", new String[] {id });
+	}
+	
+	public void deleteMedicalData(String id) {
+		SQLiteDatabase db = this.getWritableDatabase();
+		long row = db.delete(InfoProvider.TABLE_MEDICALDATA, InfoProvider.MEDICALDATA_ID + "=?", new String[] {id });
+	}
+	
 	public List<Contact> getContactList() {
 		SQLiteDatabase db = this.getWritableDatabase();
 		List<Contact> mList = new ArrayList<Contact>();
@@ -123,6 +141,7 @@ public class DBHelper extends SQLiteOpenHelper {
 		if(cursor != null) {
 			while(cursor.moveToNext()) {
 				MedicalData m = new MedicalData(contactID);
+				m.setId((cursor.getString(cursor.getColumnIndex(InfoProvider.MEDICALDATA_ID))));
 				m.setAFP((cursor.getString(cursor.getColumnIndex(InfoProvider.MEDICALDATA_AFP))));
 				m.setCA((cursor.getString(cursor.getColumnIndex(InfoProvider.MEDICALDATA_CA))));
 				m.setPSA((cursor.getString(cursor.getColumnIndex(InfoProvider.MEDICALDATA_PSA))));
@@ -143,10 +162,42 @@ public class DBHelper extends SQLiteOpenHelper {
 		if(cursor != null) {
 			while(cursor.moveToNext()) {
 				NotifyEntity m = new NotifyEntity();
-				m.setNo((cursor.getString(cursor.getColumnIndex(InfoProvider.NOTIFY_CONTACTID))));
+				m.setNo((cursor.getString(cursor.getColumnIndex(InfoProvider.NOTIFY_ID))));
 				m.setContacID((cursor.getString(cursor.getColumnIndex(InfoProvider.NOTIFY_CONTACTID))));
 				m.setVisitTime((cursor.getString(cursor.getColumnIndex(InfoProvider.NOTIFY_VISTTIME))));
 				mList.add(m);
+			}
+			cursor.close();
+		}
+		return mList;
+	}
+	
+	public List<NotifyEntity> getNeededNotifies() {
+		SQLiteDatabase db = this.getWritableDatabase();
+		List<NotifyEntity> mList = new ArrayList<NotifyEntity>();
+		// Cursor cursor = db.query(InfoProvider.TABLE_NOTIFY, null,
+		// InfoProvider.NOTIFY_CONTACTID + "=?", new String[] {contactID },
+		// null, null, null);
+		Cursor cursor = db.query(InfoProvider.TABLE_NOTIFY, null, null, null, null, null, null);
+		if(cursor != null) {
+			while(cursor.moveToNext()) {
+				NotifyEntity m = new NotifyEntity();
+				m.setNo((cursor.getString(cursor.getColumnIndex(InfoProvider.NOTIFY_CONTACTID))));
+				m.setContacID((cursor.getString(cursor.getColumnIndex(InfoProvider.NOTIFY_CONTACTID))));
+				m.setVisitTime((cursor.getString(cursor.getColumnIndex(InfoProvider.NOTIFY_VISTTIME))));
+				long currentTime = System.currentTimeMillis();
+				Date date = null;
+				SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+				try {
+					date = formatter.parse(m.getVisitTime());
+					if(date.getTime() < currentTime) {
+						mList.add(m);
+					}
+				}
+				catch(ParseException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 			}
 			cursor.close();
 		}

@@ -3,12 +3,17 @@ package com.graduate.infocollect.activity;
 import java.util.ArrayList;
 import java.util.List;
 
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.DialogInterface.OnClickListener;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemLongClickListener;
 import android.widget.BaseAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -25,8 +30,7 @@ import com.graduate.infocollect.entity.MedicalData;
  * @作者：cmcc
  * @时间：May 9, 201510:23:41 PM
  * @版本：1.0.0
- * 
-*/
+ */
 public class ItemListActivity extends BaseActivity {
 	private ListView mListview;
 	private List<MedicalData> mList = new ArrayList<MedicalData>();
@@ -46,6 +50,42 @@ public class ItemListActivity extends BaseActivity {
 	private void initView() {
 		tv_name = (TextView)findViewById(R.id.title_name);
 		mListview = (ListView)findViewById(R.id.listview);
+		mListview.setOnItemLongClickListener(new OnItemLongClickListener() {
+			
+			@Override
+			public boolean onItemLongClick(AdapterView<?> parent, View view, final int position, long id) {
+				final String contactId = mList.get(position).getContactId();
+				if(contactId.equals("-1")) {
+					return true;
+				}
+				final CharSequence[] items = {"删除该条提醒", "编辑该条数据" }; // 设置选择内容
+				AlertDialog.Builder builder = new AlertDialog.Builder(ItemListActivity.this);
+				builder.setItems(items, new OnClickListener() {
+					
+					@Override
+					public void onClick(DialogInterface dialog, int which) {
+						// TODO Auto-generated method stub
+						if(which == 0) {
+							DBHelper.getInstance().deleteMedicalData(mList.get(position).getId());
+							mList.remove(position);
+							adapter.notifyDataSetChanged();
+						}
+						else {
+							Intent intent = new Intent(ItemListActivity.this, AddItemActivity.class);
+							intent.putExtra("id", contact.getId());
+							intent.putExtra("medicalid", mList.get(position).getId());
+							intent.putExtra(MedicalData.MEDICALDATA, mList.get(position));
+							startActivity(intent);
+						}
+						dialog.dismiss();
+					}
+				});
+				builder.show();
+				
+				return true;
+			}
+			
+		});
 	}
 	
 	private void initData() {
@@ -60,8 +100,7 @@ public class ItemListActivity extends BaseActivity {
 	 * @param v
 	 * @输出：void
 	 * @作者：cmcc
-	 * 
-	*/
+	 */
 	public void onShowProfile(View v) {
 		Intent intent = new Intent(ItemListActivity.this, ProfileActivity.class);
 		intent.putExtra(Contact.CONTACT, contact);
@@ -74,21 +113,20 @@ public class ItemListActivity extends BaseActivity {
 	 * @param v
 	 * @输出：void
 	 * @作者：cmcc
-	 * 
-	*/
+	 */
 	public void onAddItem(View v) {
 		Intent intent = new Intent(ItemListActivity.this, AddItemActivity.class);
 		intent.putExtra("id", contact.getId());
 		startActivity(intent);
 	}
+	
 	/**
 	 * @方法名：onShowChart
 	 * @描述：显示chart
 	 * @param v
 	 * @输出：void
 	 * @作者：cmcc
-	 * 
-	*/
+	 */
 	public void onShowChart(View v) {
 		if(mList.size() <= 1) {
 			return;

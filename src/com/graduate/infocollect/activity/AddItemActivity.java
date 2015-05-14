@@ -3,6 +3,8 @@ package com.graduate.infocollect.activity;
 import com.graduate.cancerinfocollect.R;
 import com.graduate.infocollect.db.DBHelper;
 import com.graduate.infocollect.db.InfoProvider;
+import com.graduate.infocollect.entity.Contact;
+import com.graduate.infocollect.entity.MedicalData;
 
 import android.content.ContentValues;
 import android.content.Intent;
@@ -23,6 +25,7 @@ import android.widget.TextView;
  */
 public class AddItemActivity extends BaseActivity {
 	private EditText et_psa, et_ca, et_afp;
+	MedicalData medicalData;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -31,6 +34,7 @@ public class AddItemActivity extends BaseActivity {
 		setContentView(R.layout.activity_additem);
 		initView();
 		initListener();
+		initData();
 	}
 	
 	/**
@@ -42,6 +46,16 @@ public class AddItemActivity extends BaseActivity {
 		et_psa = (EditText)findViewById(R.id.et_psa);
 		et_ca = (EditText)findViewById(R.id.et_ca);
 		et_afp = (EditText)findViewById(R.id.et_afp);
+	}
+	
+	private void initData() {
+		medicalData = (MedicalData)getIntent().getExtras().get(MedicalData.MEDICALDATA);
+		
+		if(medicalData != null) {
+			et_psa.setText(medicalData.getPSA());
+			et_ca.setText(medicalData.getCA());
+			et_afp.setText(medicalData.getAFP());
+		}
 	}
 	
 	/**
@@ -59,11 +73,16 @@ public class AddItemActivity extends BaseActivity {
 			return;
 		}
 		ContentValues cv = new ContentValues();
-		cv.put(InfoProvider.MEDICALDATA_CONTACT_ID, getIntent().getStringExtra("id"));
 		cv.put(InfoProvider.MEDICALDATA_PSA, psaString);
 		cv.put(InfoProvider.MEDICALDATA_CA, caString);
 		cv.put(InfoProvider.MEDICALDATA_AFP, afpString);
-		DBHelper.getInstance().insert(InfoProvider.TABLE_MEDICALDATA, cv);
+		if(medicalData != null) {// 保存
+			DBHelper.getInstance().updateMedial(getIntent().getStringExtra("medicalid"), cv);
+		}
+		else {// 新建的数据
+			cv.put(InfoProvider.MEDICALDATA_CONTACT_ID, getIntent().getStringExtra("id"));
+			DBHelper.getInstance().insert(InfoProvider.TABLE_MEDICALDATA, cv);
+		}
 		finish();
 	}
 	

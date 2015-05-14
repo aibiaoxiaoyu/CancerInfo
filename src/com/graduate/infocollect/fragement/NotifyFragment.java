@@ -4,13 +4,17 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
+import android.content.DialogInterface.OnClickListener;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemLongClickListener;
 import android.widget.BaseAdapter;
-import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -34,11 +38,40 @@ public class NotifyFragment extends Fragment {
 		mInflater = inflater;
 		view = inflater.inflate(R.layout.fragment_notify, container, false);
 		mListview = (ListView)view.findViewById(R.id.listview);
-//		mList.clear();
-//		mList.add(new NotifyEntity("-1", "-1", "time"));
-//		mList.addAll(DBHelper.getInstance().getNotifyList());
+		// mList.clear();
+		// mList.add(new NotifyEntity("-1", "-1", "time"));
+		// mList.addAll(DBHelper.getInstance().getNotifyList());
 		adapter = new NotifyAdapter(mList);
 		mListview.setAdapter(adapter);
+		mListview.setOnItemLongClickListener(new OnItemLongClickListener() {
+			
+			@Override
+			public boolean onItemLongClick(AdapterView<?> parent, View view, final int position, long id) {
+				// TODO Auto-generated method stub
+				
+				// TODO Auto-generated method stub
+				final String notifyid = mList.get(position).getNo();
+				if(notifyid.equals("-1")) {
+					return true;
+				}
+				final CharSequence[] items = {"删除该条提醒" }; // 设置选择内容
+				AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+				builder.setItems(items, new OnClickListener() {
+					
+					@Override
+					public void onClick(DialogInterface dialog, int which) {
+						// TODO Auto-generated method stub
+						mList.remove(position);
+						adapter.notifyDataSetChanged();
+						DBHelper.getInstance().deleteNotifyEntity(notifyid);
+						dialog.dismiss();
+					}
+				});
+				builder.show();
+				return true;
+				
+			}
+		});
 		return view;
 	}
 	
@@ -46,11 +79,13 @@ public class NotifyFragment extends Fragment {
 	public void onResume() {
 		// TODO Auto-generated method stub
 		super.onResume();
-		mList.clear();
-		mList.add(new NotifyEntity("-1", "-1", "time"));
-		mList.addAll(DBHelper.getInstance().getNotifyList());
-		map = DBHelper.getInstance().getContactMap();
-		adapter.notifyDataSetChanged();
+		if(adapter != null) {
+			mList.clear();
+			mList.add(new NotifyEntity("-1", "-1", "time"));
+			mList.addAll(DBHelper.getInstance().getNotifyList());
+			map = DBHelper.getInstance().getContactMap();
+			adapter.notifyDataSetChanged();
+		}
 	}
 	
 	public class NotifyAdapter extends BaseAdapter {
