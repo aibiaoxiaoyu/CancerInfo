@@ -185,19 +185,27 @@ public class DBHelper extends SQLiteOpenHelper {
 				m.setNo((cursor.getString(cursor.getColumnIndex(InfoProvider.NOTIFY_CONTACTID))));
 				m.setContacID((cursor.getString(cursor.getColumnIndex(InfoProvider.NOTIFY_CONTACTID))));
 				m.setVisitTime((cursor.getString(cursor.getColumnIndex(InfoProvider.NOTIFY_VISTTIME))));
-				long currentTime = System.currentTimeMillis();
-				Date date = null;
 				SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
-				try {
-					date = formatter.parse(m.getVisitTime());
-					if(date.getTime() < currentTime) {
+//				try {
+				System.out.println(m.getVisitTime());
+				System.out.println(formatter.format(new Date()));
+					if(m.getVisitTime().equals(formatter.format(new Date()))){
 						mList.add(m);
 					}
-				}
-				catch(ParseException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
+//				}
+//				long currentTime = System.currentTimeMillis();
+//				Date date = null;
+//				SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+//				try {
+//					date = formatter.parse(m.getVisitTime());
+//					if(date.getTime() < formatter.format(new Date())) {
+//						mList.add(m);
+//					}
+//				}
+//				catch(ParseException e) {
+//					// TODO Auto-generated catch block
+//					e.printStackTrace();
+//				}
 			}
 			cursor.close();
 		}

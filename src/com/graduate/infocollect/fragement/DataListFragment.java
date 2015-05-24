@@ -122,7 +122,23 @@ public class DataListFragment extends Fragment {
 		
 		public void onDateSet(DatePicker view, int year, int month, int day) {
 			ContentValues cv = new ContentValues();
-			cv.put(InfoProvider.NOTIFY_VISTTIME, year + "-" + (month + 1) + "-" + day + "");
+
+			StringBuilder sb = new StringBuilder();
+			sb.append(year + "-");
+			if(month <= 9) {
+				sb.append("0" + (month + 1));
+			}
+			else {
+				sb.append(month + 1);
+			}
+			sb.append("-");
+			if(day <= 9) {
+				sb.append("0" + day);
+			}
+			else {
+				sb.append(day);
+			}
+			cv.put(InfoProvider.NOTIFY_VISTTIME, sb.toString());
 			cv.put(InfoProvider.NOTIFY_CONTACTID, contactID);
 			DBHelper.getInstance().insert(InfoProvider.TABLE_NOTIFY, cv);
 		}

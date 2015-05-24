@@ -177,7 +177,7 @@
                         android:id="@+id/tv_birthday"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="1989-01-01"
+                        android:text="1989-12-12"
                         android:textAppearance="?android:attr/textAppearanceMedium" />
 
                     <Button
